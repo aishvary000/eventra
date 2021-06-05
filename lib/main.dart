@@ -13,6 +13,11 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
           title: Text('Eventra'),
         ),
+        body: Column(
+          children: [
+            FlatButton.icon(onPressed: (){}, icon:Icon(Icons.delete), label: Text("Delete user"))
+          ],
+        ),
       ),
     );
   }
