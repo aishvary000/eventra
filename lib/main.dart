@@ -1,3 +1,4 @@
+import 'package:eventra/Screens/nav.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -9,16 +10,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Eventra'),
-        ),
-        body: Column(
-          children: [
-            FlatButton.icon(onPressed: (){}, icon:Icon(Icons.delete), label: Text("Delete user"))
-          ],
-        ),
+      theme: ThemeData(
+        primaryColor: Colors.teal,
       ),
+      home: Nav(),
     );
   }
 }
