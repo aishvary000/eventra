@@ -1,5 +1,6 @@
-import 'package:eventra/Screens/nav.dart';
 import 'package:flutter/material.dart';
+// import 'package:eventra/screens/nav.dart';
+import 'package:eventra/screens/home_normal_user.dart';
 
 void main() {
   runApp(MyApp());
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.teal,
       ),
-      home: Nav(),
+      home: HomeNormalUser(),
     );
   }
 }
