@@ -1,12 +1,12 @@
-import 'package:eventra/Screens/Authentication/signup.dart';
+import 'package:eventra/Screens/Authentication/log_in.dart';
 import 'package:flutter/material.dart';
 
-class Login extends StatefulWidget {
+class SignUp extends StatefulWidget {
   @override
-  _LoginState createState() => _LoginState();
+  _SignUpState createState() => _SignUpState();
 }
 
-class _LoginState extends State<Login> {
+class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -33,7 +33,7 @@ class _LoginState extends State<Login> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
-                      'Login',
+                      'Sign Up',
                       style: TextStyle(
                           fontSize: 25.0, fontWeight: FontWeight.bold),
                     ),
@@ -74,11 +74,11 @@ class _LoginState extends State<Login> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Forgot password?',
+                      'Forget password?',
                       style: TextStyle(fontSize: 12.0),
                     ),
                     ElevatedButton(
-                      child: Text('Login'),
+                      child: Text('Sign Up'),
                       style: ElevatedButton.styleFrom(
                         primary: Colors.purple,
                       ),
@@ -91,12 +91,12 @@ class _LoginState extends State<Login> {
               GestureDetector(
                 onTap: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => SignUp()));
+                      MaterialPageRoute(builder: (context) => Login()));
                 },
                 child: Text.rich(
-                  TextSpan(text: 'New User?     ', children: [
+                  TextSpan(text: 'Already have an account?    ', children: [
                     TextSpan(
-                      text: 'Signup',
+                      text: 'Sign In',
                       style: TextStyle(color: Colors.deepPurple),
                     ),
                   ]),
