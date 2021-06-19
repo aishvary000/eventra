@@ -1,4 +1,4 @@
-import 'package:eventra/Screens/nav.dart';
+import 'package:eventra/Screens/structure.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -10,9 +10,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(
-        primaryColor: Colors.teal,
-      ),
+      theme: ThemeData.light().copyWith(
+          primaryColor: Colors.teal,
+          floatingActionButtonTheme:
+              FloatingActionButtonThemeData(backgroundColor: Colors.teal)),
       home: Nav(),
     );
   }

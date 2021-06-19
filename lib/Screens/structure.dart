@@ -10,6 +10,7 @@ class Nav extends StatefulWidget {
 }
 
 class _NavState extends State<Nav> {
+  Home home = Home();
   int _currentIndex = 0;
   List<String> appbarText = ['Home', 'Calender', 'TimeTable', 'Profile'];
   List<Widget> displayWidget = [Home(), Calendar(), Timetable(), Profile()];
@@ -17,7 +18,10 @@ class _NavState extends State<Nav> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(appbarText[_currentIndex]),
+        title: Text(
+          appbarText[_currentIndex],
+          style: TextStyle(fontSize: 25.0),
+        ),
       ),
       body: displayWidget[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
