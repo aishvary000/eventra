@@ -1,11 +1,15 @@
-import 'package:eventra/Screens/Authentication/signup.dart';
-import 'package:flutter/material.dart';
-// import 'package:eventra/screens/nav.dart';
-//import 'package:eventra/screens/home_normal_user.dart';
-import 'package:eventra/Screens/Authentication/log_in.dart';
-//import 'package:eventra/Screens/Authentication/signup.dart';
 
-void main() {
+import 'package:eventra/Database/firebase.dart';
+import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:provider/provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+
+Future<void> main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -13,11 +17,37 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        primaryColor: Colors.teal,
+    return MultiProvider(
+      providers: [
+        Provider<AuthenticationService>(
+          create: (_) => AuthenticationService(FirebaseAuth.instance),
+        ),
+        StreamProvider(
+            create: (context) => context.read<AuthenticationService>().authStateChanges,
+            initialData: null
+            )
+      ],
+      child: MaterialApp(
+        theme: ThemeData(
+          primaryColor: Colors.teal,
+        ),
+        home: AuthenticationWrapper(),
       ),
-      home: Login(),
     );
+  }
+}
+
+class AuthenticationWrapper extends StatelessWidget{
+  @override
+  Widget build(BuildContext context) {
+    final firebaseUser = context.watch<User>();
+    if(firebaseUser != null)
+      {
+        FirebaseFirestore store = FirebaseFirestore.instance;
+        store.collection("Users").doc(firebaseUser.uid).get();
+        return Text("Signed IN");
+      }
+    return Text("Not Signed IN");
+    return Container();
   }
 }
