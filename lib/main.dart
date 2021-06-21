@@ -30,6 +30,8 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         theme: ThemeData(
           primaryColor: Colors.teal,
+          floatingActionButtonTheme:
+            FloatingActionButtonThemeData(backgroundColor: Colors.teal)),
         ),
         home: AuthenticationWrapper(),
       ),
