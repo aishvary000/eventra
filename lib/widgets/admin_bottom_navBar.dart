@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class BottomNavigationBarTravel extends StatefulWidget {
+class AdminBottomNavigationBarTravel extends StatefulWidget {
   @override
-  _BottomNavigationBarTravelState createState() =>
-      _BottomNavigationBarTravelState();
+  _AdminBottomNavigationBarTravelState createState() =>
+      _AdminBottomNavigationBarTravelState();
 }
 
-class _BottomNavigationBarTravelState extends State<BottomNavigationBarTravel> {
-  int _selectedIndex = 0;
+class _AdminBottomNavigationBarTravelState extends State<AdminBottomNavigationBarTravel> {
+  int _selectedIndex = 2;
 
   void _onItemTapped(int index) {
     setState(() {
@@ -49,6 +49,14 @@ class _BottomNavigationBarTravelState extends State<BottomNavigationBarTravel> {
             // label: 'Calender',
             activeIcon: new Icon(Icons.calendar_today, color: Colors.black),
             label: 'Calender',
+          ),
+          BottomNavigationBarItem(
+            icon: new Icon(
+              Icons.add_box,
+            ),
+            // label: 'Calender',
+            activeIcon: new Icon(Icons.add_box, color: Colors.black),
+            label: 'Add',
           ),
           BottomNavigationBarItem(
             icon: new Icon(Icons.notifications),
