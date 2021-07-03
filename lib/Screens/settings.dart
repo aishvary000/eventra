@@ -1,3 +1,4 @@
+import 'package:eventra/Database/firebase.dart';
 import 'package:settings_ui/settings_ui.dart';
 import 'package:flutter/material.dart';
 
@@ -9,6 +10,7 @@ class Settings extends StatefulWidget {
 }
 
 class _SettingsState extends State<Settings> {
+  final AuthenticationService _auth = AuthenticationService();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -91,11 +93,20 @@ class _SettingsState extends State<Settings> {
               height: 50,
             ),
             Center(
-              child: OutlineButton(
-                padding: EdgeInsets.symmetric(horizontal: 40),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20)),
-                onPressed: () {},
+              child: OutlinedButton(
+                style: ButtonStyle(
+                  shape: MaterialStateProperty.all(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  ),
+                ),
+                // padding: EdgeInsets.symmetric(horizontal: 40),
+                // shape: RoundedRectangleBorder(
+                //     borderRadius: BorderRadius.circular(20)),
+                onPressed: () async {
+                  await _auth.logout();
+                },
                 child: Text("Logout",
                     style: TextStyle(
                         fontSize: 16, letterSpacing: 2.2, color: Colors.black)),
@@ -145,7 +156,7 @@ class _SettingsState extends State<Settings> {
                   ],
                 ),
                 actions: [
-                  FlatButton(
+                  TextButton(
                       onPressed: () {
                         Navigator.of(context).pop();
                       },

@@ -1,5 +1,6 @@
 import 'package:eventra/Screens/Authentication/signup.dart';
 import 'package:flutter/material.dart';
+import 'package:eventra/Database/firebase.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -7,6 +8,10 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  final AuthenticationService _auth = AuthenticationService();
+  String email = '';
+  String password = '';
+  String error = '';
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -51,6 +56,11 @@ class _LoginState extends State<Login> {
                     borderRadius: BorderRadius.circular(20.0),
                   ),
                 ),
+                onChanged: (val) {
+                  setState(() {
+                    email = val;
+                  });
+                },
               ),
               SizedBox(
                 height: 20.0,
@@ -64,9 +74,21 @@ class _LoginState extends State<Login> {
                     borderRadius: BorderRadius.circular(20.0),
                   ),
                 ),
+                onChanged: (val) {
+                  setState(() {
+                    password = val;
+                  });
+                },
               ),
               SizedBox(
-                height: 30.0,
+                height: 15.0,
+              ),
+              Text(
+                error,
+                style: TextStyle(color: Colors.red),
+              ),
+              SizedBox(
+                height: 15.0,
               ),
               Padding(
                 padding: const EdgeInsets.all(10.0),
@@ -82,7 +104,15 @@ class _LoginState extends State<Login> {
                       style: ElevatedButton.styleFrom(
                         primary: Colors.purple,
                       ),
-                      onPressed: () {},
+                      onPressed: () async {
+                        dynamic result = await _auth.signIn(
+                            email: email, password: password);
+                        if (result == null) {
+                          error = 'Please enter valid email and password';
+                        } else {
+                          print(result.uid);
+                        }
+                      },
                     ),
                   ],
                 ),
