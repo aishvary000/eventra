@@ -1,6 +1,5 @@
-import 'package:eventra/Screens/Authentication/log_in.dart';
 import 'package:flutter/material.dart';
-
+import 'package:eventra/Database/firebase.dart';
 
 class SignUp extends StatefulWidget {
   @override
@@ -11,8 +10,12 @@ class _SignUpState extends State<SignUp> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  bool _success = false;
-  String _userEmail = "";
+  final AuthenticationService _auth = AuthenticationService();
+  // bool _success = false;
+  // String _userEmail = "";
+  String email = '';
+  String password = '';
+  String error = '';
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -51,46 +54,61 @@ class _SignUpState extends State<SignUp> {
                 SizedBox(
                   height: 30.0,
                 ),
-                
                 TextFormField(
-                    controller: _emailController,
-                    validator: (value){
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter some text';
-                      }
-                      return null;
-                    },
-                    decoration: InputDecoration(
-                      hintText: 'Email',
-                      suffixIcon: Icon(Icons.email),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
+                  controller: _emailController,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter Email';
+                    }
+                    return null;
+                  },
+                  decoration: InputDecoration(
+                    hintText: 'Email',
+                    suffixIcon: Icon(Icons.email),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20.0),
                     ),
+                  ),
+                  onChanged: (val) {
+                    setState(() {
+                      email = val;
+                    });
+                  },
                 ),
                 SizedBox(
                   height: 20.0,
                 ),
                 TextFormField(
                   controller: _passwordController,
-                  validator: (value){
-                    if (value == null || value.isEmpty) {
-                      return 'Password required';
+                  validator: (value) {
+                    if (value == null || value.length < 8) {
+                      return 'Minimum 8 characters of password required';
                     }
                     return null;
                   },
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      hintText: 'Password',
-                      suffixIcon: Icon(Icons.visibility_off),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    hintText: 'Password',
+                    suffixIcon: Icon(Icons.visibility_off),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20.0),
                     ),
-
+                  ),
+                  onChanged: (val) {
+                    setState(() {
+                      password = val;
+                    });
+                  },
                 ),
                 SizedBox(
-                  height: 30.0,
+                  height: 15.0,
+                ),
+                Text(
+                  error,
+                  style: TextStyle(color: Colors.red),
+                ),
+                SizedBox(
+                  height: 15.0,
                 ),
                 Padding(
                   padding: const EdgeInsets.all(10.0),
@@ -106,15 +124,25 @@ class _SignUpState extends State<SignUp> {
                         style: ElevatedButton.styleFrom(
                           primary: Colors.purple,
                         ),
-                        onPressed: () {
+                        onPressed: () async {
+                          setState(() {
+                            error = '';
+                          });
                           if (_formKey.currentState!.validate()) {
-                            // If the form is valid, display a snackbar. In the real world,
+                            // If the form is valid, display a snackBar. In the real world,
                             // you'd often call a server or save the information in a database.
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(SnackBar(content: Text('Processing Data')));
-
+                            // ScaffoldMessenger.of(context).showSnackBar(
+                            //     SnackBar(content: Text('Processing Data')));
+                            dynamic result = await _auth.signUp(
+                                email: email, password: password);
+                            if (result == null) {
+                              setState(() {
+                                error = 'Please enter valid email';
+                              });
+                            } else {
+                              print(result.uid);
+                            }
                           }
-                          
                         },
                       ),
                     ],
@@ -123,8 +151,7 @@ class _SignUpState extends State<SignUp> {
                 SizedBox(height: 20.0),
                 GestureDetector(
                   onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Login()));
+                    Navigator.of(context).pop();
                   },
                   child: Text.rich(
                     TextSpan(text: 'Already have an account?    ', children: [
