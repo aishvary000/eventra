@@ -1,3 +1,4 @@
+import 'package:eventra/Database/firebase.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:eventra/Model/meeting_card.dart';
@@ -73,6 +74,7 @@ class _AddMeetingState extends State<AddMeeting> {
                 widget.meet
                     .addMeeting(widget.meet.topic, widget.meet.description);
               });
+              AuthenticationService().addNotification(widget.meet.topic, widget.meet.description);
               Navigator.of(context).pop();
             },
             child: Text('Save'),
