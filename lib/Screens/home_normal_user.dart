@@ -29,35 +29,48 @@ class _HomeNormalUserState extends State<HomeNormalUser> {
           bottomNavigationBar: BottomNavigationBarTravel(),
           body: SafeArea(
 
-            child: Container(
-              child: ListView(
+            child: Column(
+              children:[
+                ListView(
+                  children: snapshot.data!.docs.map((DocumentSnapshot document)
+                  {
+                    Map<String, dynamic> data = document.data() as Map<String, dynamic>;
+                    return new ListTile(
+                      title: new Text(data['title']),
+                      subtitle: new Text(data['clubName']),
+                    );
+                  }).toList(),
+                ),
+                Container(
+                child: ListView(
 
-                physics: BouncingScrollPhysics(),
-                children: <Widget>[
+                  physics: BouncingScrollPhysics(),
+                  children: <Widget>[
 
-                  /// Custom Navigation Drawer and Search Button
-                  Container(
+                    /// Custom Navigation Drawer and Search Button
+                    Container(
 
-                    height: 57.6,
-                    margin: EdgeInsets.only(top: 10.8, left: 10.8),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Container(
-                          height: 57.6,
-                          width: 57.6,
-                          padding: EdgeInsets.all(18),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(9.6),
-                            color: Color(0x080a0928),
+                      height: 57.6,
+                      margin: EdgeInsets.only(top: 10.8, left: 10.8),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Container(
+                            height: 57.6,
+                            width: 57.6,
+                            padding: EdgeInsets.all(18),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(9.6),
+                              color: Color(0x080a0928),
+                            ),
+                            child: SvgPicture.asset('assets/svg/icon_drawer.svg'),
                           ),
-                          child: SvgPicture.asset('assets/svg/icon_drawer.svg'),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-             ],
-              ),
+               ],
+                ),
+              ),]
             ),
 
           ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'addMeeting.dart';
 import 'package:eventra/Model/meeting_card.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -8,25 +9,45 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  final Stream<QuerySnapshot> _notificationStream = FirebaseFirestore.instance
+      .collection('General Notification').snapshots();
+
   AddMeeting meet = AddMeeting();
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: ListView.builder(
-          itemCount: meet.meet.meetings.length,
-          itemBuilder: (BuildContext context, int index) {
-            return MeetingCard(
-                topic: meet.meet.topic, description: meet.meet.description);
-          }),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => AddMeeting()));
-          print(meet.meet.meetings);
-          setState(() {});
-        },
-        child: Icon(Icons.add),
-      ),
-    );
+    return StreamBuilder<QuerySnapshot>(
+        stream: _notificationStream,
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (snapshot.hasError) {
+            return Text('Something Went Wrong');
+          }
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Text("Loading");
+          }
+          return Scaffold(
+            body: ListView(
+              children: snapshot.data!.docs.map((DocumentSnapshot document) {
+                Map<String, dynamic> data = document.data() as Map<
+                    String,
+                    dynamic>;
+                return new ListTile(
+                  title: new Text(data['title']),
+                  subtitle: new Text(data['clubName']),
+                );
+              }).toList(),
+            ),
+            floatingActionButton: FloatingActionButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => AddMeeting()));
+                print(meet.meet.meetings);
+                setState(() {});
+              },
+              child: Icon(Icons.add),
+            ),
+          );
+        });
   }
 }
