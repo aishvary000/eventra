@@ -3,6 +3,8 @@ import 'addMeeting.dart';
 import 'package:eventra/Model/meeting_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import 'admin_choices/admin_choices.dart';
+
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
@@ -41,7 +43,7 @@ class _HomeState extends State<Home> {
               onPressed: () {
                 Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => AddMeeting()));
+                    MaterialPageRoute(builder: (context) => AdminChoices()));
                 print(meet.meet.meetings);
                 setState(() {});
               },
