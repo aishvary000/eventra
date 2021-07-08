@@ -1,6 +1,5 @@
 import 'package:eventra/Screens/profile.dart';
 import 'package:eventra/screens/calender.dart';
-import 'package:table_calendar/table_calendar.dart';
 import 'package:eventra/screens/timetable.dart';
 import 'package:eventra/Screens/home.dart';
 import 'package:flutter/material.dart';

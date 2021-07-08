@@ -1,16 +1,16 @@
-import 'package:eventra/Database/firebase.dart';
+// import 'package:eventra/Database/firebase.dart';
 // import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:eventra/Model/meeting_card.dart';
+import 'package:eventra/Model/event_card.dart';
 
-class AddMeeting extends StatefulWidget {
-  final Meeting meet = Meeting();
+class AddEvent extends StatefulWidget {
+  final Event event = Event();
 
   @override
-  _AddMeetingState createState() => _AddMeetingState();
+  _AddEventState createState() => _AddEventState();
 }
 
-class _AddMeetingState extends State<AddMeeting> {
+class _AddEventState extends State<AddEvent> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +30,7 @@ class _AddMeetingState extends State<AddMeeting> {
       body: Column(
         children: [
           Text(
-            "Add a new Meeting",
+            "Add a new Event",
             style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
           ),
           SizedBox(
@@ -45,7 +45,7 @@ class _AddMeetingState extends State<AddMeeting> {
             ),
             onChanged: (val) {
               setState(() {
-                widget.meet.topic = val;
+                widget.event.topic = val;
               });
             },
           ),
@@ -61,7 +61,23 @@ class _AddMeetingState extends State<AddMeeting> {
             ),
             onChanged: (val) {
               setState(() {
-                widget.meet.description = val;
+                widget.event.description = val;
+              });
+            },
+          ),
+          SizedBox(
+            height: 20.0,
+          ),
+          TextField(
+            decoration: InputDecoration(
+              hintText: 'Organised By',
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(20.0),
+              ),
+            ),
+            onChanged: (val) {
+              setState(() {
+                widget.event.description = val;
               });
             },
           ),
@@ -71,10 +87,10 @@ class _AddMeetingState extends State<AddMeeting> {
           ElevatedButton(
             onPressed: () {
               setState(() {
-                widget.meet
-                    .addMeeting(widget.meet.topic, widget.meet.description);
+                widget.event.addEvent(widget.event.topic, widget.event.description,
+                    widget.event.organizedBy);
               });
-              AuthenticationService().addNotification(widget.meet.topic, widget.meet.description);
+              // AuthenticationService().addNotification(widget.meet.topic, widget.meet.description);
               Navigator.of(context).pop();
             },
             child: Text('Save'),
