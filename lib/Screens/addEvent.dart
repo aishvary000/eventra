@@ -1,10 +1,13 @@
 // import 'package:eventra/Database/firebase.dart';
 // import 'package:flutter/cupertino.dart';
+import 'package:eventra/Database/firebase.dart';
 import 'package:flutter/material.dart';
 import 'package:eventra/Model/event_card.dart';
 
 class AddEvent extends StatefulWidget {
   final Event event = Event();
+
+
 
   @override
   _AddEventState createState() => _AddEventState();
@@ -62,6 +65,7 @@ class _AddEventState extends State<AddEvent> {
             onChanged: (val) {
               setState(() {
                 widget.event.description = val;
+
               });
             },
           ),
@@ -77,7 +81,7 @@ class _AddEventState extends State<AddEvent> {
             ),
             onChanged: (val) {
               setState(() {
-                widget.event.description = val;
+                widget.event.organizedBy = val;
               });
             },
           ),
@@ -90,7 +94,7 @@ class _AddEventState extends State<AddEvent> {
                 widget.event.addEvent(widget.event.topic, widget.event.description,
                     widget.event.organizedBy);
               });
-              // AuthenticationService().addNotification(widget.meet.topic, widget.meet.description);
+              AuthenticationService().addEventToGeneralNotification(widget.event.topic, widget.event.description,widget.event.organizedBy);
               Navigator.of(context).pop();
             },
             child: Text('Save'),

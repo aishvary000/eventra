@@ -53,6 +53,19 @@ class AuthenticationService {
     return null;
 }
 }
+  Future<void>addEventToGeneralNotification(String topic,String description,String organizedBy) async{
+    CollectionReference notifications = firestore.collection("General Notification");
+    return notifications
+        .add({
+      'title': topic,
+      'clubName':organizedBy,
+      'description':description
+    })
+        .then((value) => print("Notification Added"))
+        .catchError((error) => print("Failed to add Notification: $error"));
+
+
+  }
 
   Future logout() async {
     try {
