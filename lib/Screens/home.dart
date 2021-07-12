@@ -10,8 +10,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  final Stream<QuerySnapshot> _notificationStream =
-      FirebaseFirestore.instance.collection('General Notification').snapshots();
+  final Stream<QuerySnapshot> _notificationStream = FirebaseFirestore.instance
+      .collection('General Notification').snapshots();
 
   AddMeeting meet = AddMeeting();
 
@@ -27,21 +27,36 @@ class _HomeState extends State<Home> {
             return Text("Loading");
           }
           return Scaffold(
-            body: ListView(
+            body: Column(
               children: snapshot.data!.docs.map((DocumentSnapshot document) {
-                Map<String, dynamic> data =
-                    document.data() as Map<String, dynamic>;
+                Map<String, dynamic> data = document.data() as Map<
+                    String,
+                    dynamic>;
                 return new Card(
-                  child: new ListTile(
-                    title: new Text(data['title']),
-                    subtitle: new Text(data['clubName']),
-                  ),
-                );
+                  clipBehavior: Clip.antiAlias,
+                  child: Column(
+                    children: [
+                      ListTile(
+                  title: new Text('Topic : ${data['title']}'),
+                  subtitle: new Text('Club Name : ${data['clubName']}')
+
+                ),
+                Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Text(
+
+                'Description : ${data['description']}',
+                style: TextStyle(color: Colors.black.withOpacity(0.6)),
+                ),
+                )]
+
+                ));
               }).toList(),
             ),
             floatingActionButton: FloatingActionButton(
               onPressed: () {
-                Navigator.push(context,
+                Navigator.push(
+                    context,
                     MaterialPageRoute(builder: (context) => AdminChoices()));
                 print(meet.meet.meetings);
                 setState(() {});
@@ -52,3 +67,13 @@ class _HomeState extends State<Home> {
         });
   }
 }
+// ListView(
+// children: snapshot.data!.docs.map((DocumentSnapshot document) {
+// Map<String, dynamic> data = document.data() as Map<
+// String,
+// dynamic>;
+// return new ListTile(
+// title: new Text(data['title']),
+// subtitle: new Text(data['clubName']),
+// );
+// })
