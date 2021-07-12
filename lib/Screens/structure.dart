@@ -5,7 +5,6 @@ import 'package:eventra/screens/calender.dart';
 import 'package:eventra/screens/timetable.dart';
 import 'package:eventra/Screens/home.dart';
 import 'package:flutter/material.dart';
-import 'package:eventra/Screens/try.dart';
 
 import 'FABBottomAppBar.dart';
 
@@ -77,18 +76,13 @@ class _NavState extends State<Nav> {
 
   int _currentIndex = 0;
   List<String> appbarText = ['Home', 'Calender', 'Schedule', 'Profile'];
-  List displayWidget = [
-    Home(),
-    HomeCalendarPage(),
-    Timetable(),
-    Profile()
-  ];
+  List displayWidget = [Home(), HomeCalendarPage(), Timetable(), Profile()];
   String _lastSelected = 'TAB: 0';
 
   void _selectedTab(int index) {
     setState(() {
       _lastSelected = 'TAB: $index';
-      _currentIndex= index;
+      _currentIndex = index;
     });
   }
 
@@ -107,37 +101,33 @@ class _NavState extends State<Nav> {
           style: TextStyle(fontSize: 25.0),
         ),
       ),
-        floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.amberAccent,
-          child: const Icon(
-            Icons.add,
-            color: Colors.blueGrey,
-
-          ),
-          elevation: 2.0,
-          onPressed: () {
-            addButton();
-          },
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.amberAccent,
+        child: const Icon(
+          Icons.add,
+          color: Colors.blueGrey,
         ),
-        body: displayWidget[_currentIndex],
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        bottomNavigationBar:FABBottomAppBar(
-          backgroundColor: Colors.blueGrey,
-          centerItemText: '',
-          color: Colors.white,
-          notchedShape:  CircularNotchedRectangle(),
-          selectedColor: Colors.yellowAccent,
-          onTabSelected: _selectedTab,
-
-          items: [
-            FABBottomAppBarItem(iconData: Icons.home, text: 'Home'),
-            FABBottomAppBarItem(iconData: Icons.calendar_today, text: 'Calender'),
-            FABBottomAppBarItem(iconData: Icons.schedule, text: 'Schedule'),
-            FABBottomAppBarItem(iconData: Icons.person, text: 'Profile'),
-          ],
-        ),
+        elevation: 2.0,
+        onPressed: () {
+          addButton();
+        },
+      ),
+      body: displayWidget[_currentIndex],
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: FABBottomAppBar(
+        backgroundColor: Colors.blueGrey,
+        centerItemText: '',
+        color: Colors.white,
+        notchedShape: CircularNotchedRectangle(),
+        selectedColor: Colors.yellowAccent,
+        onTabSelected: _selectedTab,
+        items: [
+          FABBottomAppBarItem(iconData: Icons.home, text: 'Home'),
+          FABBottomAppBarItem(iconData: Icons.calendar_today, text: 'Calender'),
+          FABBottomAppBarItem(iconData: Icons.schedule, text: 'Schedule'),
+          FABBottomAppBarItem(iconData: Icons.person, text: 'Profile'),
+        ],
+      ),
     );
   }
 }
-
-
