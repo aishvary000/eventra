@@ -1,10 +1,8 @@
 import 'package:eventra/Database/firebase.dart';
-import 'package:settings_ui/settings_ui.dart';
 import 'package:flutter/material.dart';
 
 class Settings extends StatefulWidget {
   static final String path = "lib/services/settings.dart";
-
   @override
   _SettingsState createState() => _SettingsState();
 }
@@ -151,9 +149,7 @@ class _SettingsState extends State<Settings> {
                 content: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text("Option A"),
-                    Text("Option B"),
-                    Text("Option C"),
+                    //Text("Option A");
                   ],
                 ),
                 actions: [

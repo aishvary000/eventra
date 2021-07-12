@@ -127,10 +127,6 @@ class _SignUpState extends State<SignUp> {
                             error = '';
                           });
                           if (_formKey.currentState!.validate()) {
-                            // If the form is valid, display a snackBar. In the real world,
-                            // you'd often call a server or save the information in a database.
-                            // ScaffoldMessenger.of(context).showSnackBar(
-                            //     SnackBar(content: Text('Processing Data')));
                             dynamic result = await _auth.signUp(
                                 email: email, password: password);
                             if (result == null) {
