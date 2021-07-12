@@ -5,16 +5,13 @@ import 'package:eventra/screens/calender.dart';
 import 'package:eventra/screens/timetable.dart';
 import 'package:eventra/Screens/home.dart';
 import 'package:flutter/material.dart';
-import 'package:eventra/Screens/try.dart';
 
-import 'FABBottomAppBar.dart';
-
-class Nav extends StatefulWidget {
+class Try extends StatefulWidget {
   @override
-  _NavState createState() => _NavState();
+  _TryState createState() => _TryState();
 }
 
-class _NavState extends State<Nav> {
+class _TryState extends State<Try> {
   void addButton() {
     showModalBottomSheet(
         context: context,
@@ -76,28 +73,14 @@ class _NavState extends State<Nav> {
   }
 
   int _currentIndex = 0;
-  List<String> appbarText = ['Home', 'Calender', 'Schedule', 'Profile'];
+  List<String> appbarText = ['Home', 'Calender', '', 'Schedule', 'Profile'];
   List displayWidget = [
     Home(),
     HomeCalendarPage(),
+    Opacity(opacity: 0),
     Timetable(),
     Profile()
   ];
-  String _lastSelected = 'TAB: 0';
-
-  void _selectedTab(int index) {
-    setState(() {
-      _lastSelected = 'TAB: $index';
-      _currentIndex= index;
-    });
-  }
-
-  void _selectedFab(int index) {
-    setState(() {
-      _lastSelected = 'FAB: $index';
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -107,37 +90,22 @@ class _NavState extends State<Nav> {
           style: TextStyle(fontSize: 25.0),
         ),
       ),
-        floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.amberAccent,
-          child: const Icon(
-            Icons.add,
-            color: Colors.blueGrey,
-
-          ),
-          elevation: 2.0,
-          onPressed: () {
-            addButton();
-          },
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () { },
+        tooltip: 'Increment',
+        child: Icon(Icons.add),
+        elevation: 2.0,
+      ),
+      bottomNavigationBar: BottomAppBar(
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[],
         ),
-        body: displayWidget[_currentIndex],
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        bottomNavigationBar:FABBottomAppBar(
-          backgroundColor: Colors.blueGrey,
-          centerItemText: '',
-          color: Colors.white,
-          notchedShape:  CircularNotchedRectangle(),
-          selectedColor: Colors.yellowAccent,
-          onTabSelected: _selectedTab,
-
-          items: [
-            FABBottomAppBarItem(iconData: Icons.home, text: 'Home'),
-            FABBottomAppBarItem(iconData: Icons.calendar_today, text: 'Calender'),
-            FABBottomAppBarItem(iconData: Icons.schedule, text: 'Schedule'),
-            FABBottomAppBarItem(iconData: Icons.person, text: 'Profile'),
-          ],
-        ),
+        shape: CircularNotchedRectangle(),
+        color: Colors.blueGrey,
+      ),
     );
   }
 }
-
-
