@@ -27,7 +27,7 @@ class _HomeState extends State<Home> {
             return Center(child: CircularProgressIndicator());
           }
           return Scaffold(
-            body: Column(
+            body: ListView(
               children: snapshot.data!.docs.map((DocumentSnapshot document) {
                 Map<String, dynamic> data =
                     document.data() as Map<String, dynamic>;
@@ -39,7 +39,7 @@ class _HomeState extends State<Home> {
                           subtitle:
                               new Text('Club Name : ${data['clubName']}')),
                       Padding(
-                        padding: const EdgeInsets.all(16.0),
+                        padding: const EdgeInset.all(16.0),
                         child: Text(
                           'Description : ${data['description']}',
                           style:
