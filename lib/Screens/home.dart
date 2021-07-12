@@ -39,7 +39,7 @@ class _HomeState extends State<Home> {
                           subtitle:
                               new Text('Club Name : ${data['clubName']}')),
                       Padding(
-                        padding: const EdgeInset.all(16.0),
+                        padding: const EdgeInsets.all(16.0),
                         child: Text(
                           'Description : ${data['description']}',
                           style:
