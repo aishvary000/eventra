@@ -11,11 +11,11 @@ class Timetable extends StatelessWidget {
         Center(
           child: Text(
             'Mess Menu',
-            style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w500),
+            style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.w500),
           ),
         ),
         SizedBox(
-          height: 10.0,
+          height: 20.0,
         ),
         Image.asset("assets/MessMenu.jpg"),
         SizedBox(
@@ -30,11 +30,11 @@ class Timetable extends StatelessWidget {
         Center(
           child: Text(
             'Bus Schedule',
-            style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w500),
+            style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.w500),
           ),
         ),
         SizedBox(
-          height: 10.0,
+          height: 20.0,
         ),
         Image.asset("assets/Bus-1.jpg"),
         Image.asset(

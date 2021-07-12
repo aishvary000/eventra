@@ -106,6 +106,7 @@ class _SettingsState extends State<Settings> {
                 //     borderRadius: BorderRadius.circular(20)),
                 onPressed: () async {
                   await _auth.logout();
+                  Navigator.of(context).pop();
                 },
                 child: Text("Logout",
                     style: TextStyle(

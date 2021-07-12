@@ -10,8 +10,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  final Stream<QuerySnapshot> _notificationStream = FirebaseFirestore.instance
-      .collection('General Notification').snapshots();
+  final Stream<QuerySnapshot> _notificationStream =
+      FirebaseFirestore.instance.collection('General Notification').snapshots();
 
   AddMeeting meet = AddMeeting();
 
@@ -24,45 +24,40 @@ class _HomeState extends State<Home> {
             return Text('Something Went Wrong');
           }
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Text("Loading");
+            return Center(child: CircularProgressIndicator());
           }
           return Scaffold(
             body: Column(
               children: snapshot.data!.docs.map((DocumentSnapshot document) {
-                Map<String, dynamic> data = document.data() as Map<
-                    String,
-                    dynamic>;
+                Map<String, dynamic> data =
+                    document.data() as Map<String, dynamic>;
                 return new Card(
-                  clipBehavior: Clip.antiAlias,
-                  child: Column(
-                    children: [
+                    clipBehavior: Clip.antiAlias,
+                    child: Column(children: [
                       ListTile(
-                  title: new Text('Topic : ${data['title']}'),
-                  subtitle: new Text('Club Name : ${data['clubName']}')
-
-                ),
-                Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Text(
-
-                'Description : ${data['description']}',
-                style: TextStyle(color: Colors.black.withOpacity(0.6)),
-                ),
-                )]
-
-                ));
+                          title: new Text('Topic : ${data['title']}'),
+                          subtitle:
+                              new Text('Club Name : ${data['clubName']}')),
+                      Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Text(
+                          'Description : ${data['description']}',
+                          style:
+                              TextStyle(color: Colors.black.withOpacity(0.6)),
+                        ),
+                      )
+                    ]));
               }).toList(),
             ),
-            floatingActionButton: FloatingActionButton(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => AdminChoices()));
-                print(meet.meet.meetings);
-                setState(() {});
-              },
-              child: Icon(Icons.add),
-            ),
+            // floatingActionButton: FloatingActionButton(
+            //   onPressed: () {
+            //     Navigator.push(context,
+            //         MaterialPageRoute(builder: (context) => AdminChoices()));
+            //     print(meet.meet.meetings);
+            //     setState(() {});
+            //   },
+            //   child: Icon(Icons.add),
+            // ),
           );
         });
   }

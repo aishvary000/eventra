@@ -11,8 +11,6 @@ class _SignUpState extends State<SignUp> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final AuthenticationService _auth = AuthenticationService();
-  // bool _success = false;
-  // String _userEmail = "";
   String email = '';
   String password = '';
   String error = '';
