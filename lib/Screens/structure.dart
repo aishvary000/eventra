@@ -75,7 +75,7 @@ class _NavState extends State<Nav> {
   }
 
   int _currentIndex = 0;
-  List<String> appbarText = ['Home', 'Calender', 'Schedule', 'Profile'];
+  // List<String> appbarText = ['Home', 'Calender', 'Schedule', 'Profile'];
   List displayWidget = [Home(), HomeCalendarPage(), Timetable(), Profile()];
   String _lastSelected = 'TAB: 0';
 
@@ -95,17 +95,11 @@ class _NavState extends State<Nav> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          appbarText[_currentIndex],
-          style: TextStyle(fontSize: 25.0),
-        ),
-      ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.amberAccent,
+        backgroundColor: Colors.amberAccent[400],
         child: const Icon(
           Icons.add,
-          color: Colors.blueGrey,
+          color: Colors.black,
         ),
         elevation: 2.0,
         onPressed: () {
@@ -119,7 +113,7 @@ class _NavState extends State<Nav> {
         centerItemText: '',
         color: Colors.white,
         notchedShape: CircularNotchedRectangle(),
-        selectedColor: Colors.yellowAccent,
+        selectedColor: Color(0xFF222121),
         onTabSelected: _selectedTab,
         items: [
           FABBottomAppBarItem(iconData: Icons.home, text: 'Home'),

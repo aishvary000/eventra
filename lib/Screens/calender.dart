@@ -88,8 +88,8 @@ class _HomeCalendarPageState extends State<HomeCalendarPage> {
                   return Center(
                     child: Container(
                       color: day.weekday == DateTime.sunday
-                          ? Colors.white
-                          : Colors.white,
+                          ? Color(0xfafafa)
+                          : Color(0xfafafa),
                       width: 40.0,
                       height: 40.0,
                       child: Center(
@@ -102,8 +102,8 @@ class _HomeCalendarPageState extends State<HomeCalendarPage> {
                   return Center(
                       child: Container(
                     color: day.weekday == DateTime.sunday
-                        ? Colors.white
-                        : Colors.white,
+                        ? Color(0xfafafa)
+                        : Color(0xfafafa),
                     width: 40.0,
                     height: 40.0,
                     child: Center(

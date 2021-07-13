@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'addMeeting.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
 import 'admin_choices/admin_choices.dart';
 
 class Home extends StatefulWidget {
@@ -27,6 +26,22 @@ class _HomeState extends State<Home> {
             return Center(child: CircularProgressIndicator());
           }
           return Scaffold(
+            appBar: AppBar(
+              title: Text('Home'),
+              centerTitle: true,
+              flexibleSpace: Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      Color(0xFF00b8d4),
+                      Color(0xFF4db6ac),
+                      Color(0xFF00897b),
+                    ],
+                    stops: [0.1, 0.5, 1.0],
+                  ),
+                ),
+              ),
+            ),
             body: ListView(
               children: snapshot.data!.docs.map((DocumentSnapshot document) {
                 Map<String, dynamic> data =

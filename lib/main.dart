@@ -14,7 +14,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-          primaryColor: Colors.teal,
+          colorScheme: ColorScheme.light(
+            primary: Color(0xFF07C277),
+            secondary: Color(0xFF45B7BD),
+          ),
+          primaryColor: Colors.blue,
           floatingActionButtonTheme:
               FloatingActionButtonThemeData(backgroundColor: Colors.teal)),
       home: Wrapper(),
