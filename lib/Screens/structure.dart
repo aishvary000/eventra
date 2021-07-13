@@ -111,9 +111,9 @@ class _NavState extends State<Nav> {
       bottomNavigationBar: FABBottomAppBar(
         backgroundColor: Colors.blueGrey,
         centerItemText: '',
-        color: Colors.white,
+        color: Color(0xFFF0F0F0),
         notchedShape: CircularNotchedRectangle(),
-        selectedColor: Color(0xFF222121),
+        selectedColor: Color(0xFF232323),
         onTabSelected: _selectedTab,
         items: [
           FABBottomAppBarItem(iconData: Icons.home, text: 'Home'),
